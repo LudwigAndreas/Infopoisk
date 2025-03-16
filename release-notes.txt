@@ -1,0 +1,11 @@
+## (2025-03-16)
+
+### Добавлено выполненное задание 1
+
+* **feature(ex01):** Added ex01 
+
+### Other Changes
+
+* **docs(README):** Added README.md
+* **docs(release-notes):** Added release notes
+
