@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import json
 import argparse
 from collections import defaultdict
 
@@ -10,10 +11,18 @@ class SearchEngine:
         self.directory_path = directory_path
         self.doc_urls = {}  # Maps document number to URL
         self.inverted_index = defaultdict(set)  # Maps terms to document numbers
-        self.build_index()
+        self.index_file = os.path.join(directory_path, "inverted_index.json")
+        
+        # Try to load existing index if it exists, otherwise build it
+        if os.path.exists(self.index_file):
+            self.load_index()
+        else:
+            self.build_index()
+            self.save_index()
 
     def build_index(self):
         """Build the inverted index from the files in the directory."""
+        print("Building inverted index...")
         # First, read the index.txt file to get document numbers and URLs
         index_file_path = os.path.join(self.directory_path, "index.txt")
         try:
@@ -52,6 +61,40 @@ class SearchEngine:
                             self.inverted_index[lemma].add(doc_number)
             except FileNotFoundError:
                 print(f"Warning: lemmas file not found for document {doc_number}")
+        
+        print(f"Inverted index built with {len(self.inverted_index)} terms.")
+
+    def save_index(self):
+        """Save the inverted index to a file."""
+        print(f"Saving inverted index to {self.index_file}...")
+        # Convert sets to lists for JSON serialization
+        serializable_index = {
+            "doc_urls": self.doc_urls,
+            "inverted_index": {term: list(docs) for term, docs in self.inverted_index.items()}
+        }
+        
+        try:
+            with open(self.index_file, 'w', encoding='utf-8') as f:
+                json.dump(serializable_index, f)
+            print("Index saved successfully.")
+        except Exception as e:
+            print(f"Error saving index: {e}")
+
+    def load_index(self):
+        """Load the inverted index from a file."""
+        print(f"Loading inverted index from {self.index_file}...")
+        try:
+            with open(self.index_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                self.doc_urls = data["doc_urls"]
+                # Convert lists back to sets
+                self.inverted_index = {term: set(docs) for term, docs in data["inverted_index"].items()}
+            print(f"Index loaded with {len(self.inverted_index)} terms.")
+        except Exception as e:
+            print(f"Error loading index: {e}")
+            # If loading fails, build the index
+            self.build_index()
+            self.save_index()
 
     def _tokenize_query(self, query):
         """Tokenize a query into operators and terms."""
@@ -152,14 +195,20 @@ def main():
     parser = argparse.ArgumentParser(description="Boolean search engine for document collection")
     parser.add_argument("--input-dir", required=True, help="Directory containing the document collection")
     parser.add_argument("query", nargs='+', help="Boolean search query")
+    parser.add_argument("--rebuild-index", action="store_true", help="Force rebuilding the index even if it exists")
     
     args = parser.parse_args()
     
     # Join query arguments into a single string
     query = ' '.join(args.query)
     
-    # Create and build the search engine
+    # Create the search engine
     search_engine = SearchEngine(args.input_dir)
+    
+    # Rebuild index if requested
+    if args.rebuild_index:
+        search_engine.build_index()
+        search_engine.save_index()
     
     # Perform the search
     results = search_engine.search(query)

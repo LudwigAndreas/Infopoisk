@@ -17,3 +17,7 @@ Simple query example
 Complex query
 
 ![Complex query](./docs/screenshot2.png)
+
+## Result
+
+Result archive stored in https://drive.google.com/file/d/1PuIXHbE8_IF1Pq2oxh2a7AwrGvKm1ma4/view?usp=drive_link
