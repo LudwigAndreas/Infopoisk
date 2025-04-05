@@ -10,8 +10,10 @@ python finder.py --input-dir ./input_dir "(programming OR java) AND summer AND N
 ## Output examples 
 
 Simple query example
-![Simple query](./docs/Screenshot 2025-04-05 at 17.16.45.png)
+
+![Simple query](./docs/screenshot1.png)
 
 
 Complex query
-![Complex query](./docs/Screenshot 2025-04-05 at 17.17.59.png)
+
+![Complex query](./docs/screenshot2.png)
