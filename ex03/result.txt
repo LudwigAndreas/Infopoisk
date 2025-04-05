@@ -1,0 +1,31 @@
+$ python3.11 finder.py --input-dir Result/downloaded_pages "(programming OR java) AND summer AND NOT winter"
+Found 3 results:
+Document 101: https://en.wikipedia.org/wiki/Logic_programming
+Document 24: https://selfsufficientme.com/
+Document 48: https://posts.decontextualize.com/pocket-sp/
+
+$ python3.11 finder.py --input-dir Result/downloaded_pages "evening AND NOT morning"
+Found 3 results:
+Document 24: https://selfsufficientme.com/
+Document 57: https://pluralistic.net/2023/08/14/hidden-worlds/#making-the-invisible-visible-and-beautiful
+Document 67: http://marvel.wikia.com/Steven_Rogers_(Earth-616)
+
+$ python3.11 finder.py --input-dir Result/downloaded_pages "hello OR goodbye"
+Found 5 results:
+Document 30: https://akbatten.com/
+Document 40: https://anxietynomore.co.uk/
+Document 63: http://marvel.wikia.com/Henry_Pym_(Earth-616)
+Document 71: https://www.ourconsciouskitchen.com/
+Document 95: https://en.wikipedia.org/wiki/Assembly_language
+
+$ python3.11 finder.py --input-dir Result/downloaded_pages "fine AND NOT bad OR so"
+Found 9 results:
+Document 27: https://www.blairtindall.com/
+Document 28: https://www.unchartedmag.com/
+Document 48: https://posts.decontextualize.com/pocket-sp/
+Document 5: https://www.newyorker.com/magazine/2023/12/18/state-of-silence-the-espionage-act-and-the-rise-of-americas-secrecy-regime-sam-lebovic-book-review
+Document 57: https://pluralistic.net/2023/08/14/hidden-worlds/#making-the-invisible-visible-and-beautiful
+Document 58: https://www.laphamsquarterly.org/roundtable/its-time-some-game-theory
+Document 67: http://marvel.wikia.com/Steven_Rogers_(Earth-616)
+Document 88: https://en.wikipedia.org/wiki/Unsupervised_learning
+Document 89: https://en.wikipedia.org/wiki/Computer_graphics
