@@ -12,3 +12,8 @@ script can handle list of flags:
  - `--top_k` - Get more results
 
 
+## Demo
+
+added demo for web ui search
+
+[Demo video](https://drive.google.com/drive/folders/1GeVzZMiErEu1sWopYdUgUKj28EZoglhH?hl=ru)
